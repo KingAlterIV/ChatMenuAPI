@@ -1,39 +1,9 @@
-plugins {
-    id 'java'
-    id 'eclipse'
-    id 'com.github.johnrengelman.shadow' version '2.0.1'
-    id 'com.github.ben-manes.versions' version '0.17.0'
-    id 'maven'
-}
-
-group 'com.voxelgameslib'
+group 'me.minidigger'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
-
-repositories {
-    mavenLocal()
-    mavenCentral()
-    maven { url "https://hub.spigotmc.org/nexus/content/groups/public/" }
-    maven { url "https://voxelgameslib.github.io/VoxelGamesLibv2/mvn-repo" }
-    maven { url "http://repo.dmulloy2.net/content/groups/public/" }
-}
-
 dependencies {
-    compileOnly group: 'org.spigotmc', name: 'spigot-api', version: '1.12.1-R0.1-SNAPSHOT'
-    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
-    compileOnly group: 'com.comphenix.protocol', name: 'ProtocolLib', version: '4.4.0-SNAPSHOT'
+    compileOnly rootProject
 }
-
-javadoc {
-    options.stylesheetFile = new File(projectDir, "src/main/javadocs/javadoc_stylesheet.css")
-}
-
-shadowJar {
-    configurations = [project.configurations.compile]
-}
-
-build.dependsOn shadowJar
 
 task createPom() {
     pom {
