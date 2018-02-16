@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'eclipse'
+    id 'com.github.johnrengelman.shadow' version '2.0.1'
+    id 'com.github.ben-manes.versions' version '0.17.0'
+    id 'maven'
+}
+
+group 'com.voxelgameslib'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://hub.spigotmc.org/nexus/content/groups/public/" }
+    maven { url "https://voxelgameslib.github.io/VoxelGamesLibv2/mvn-repo" }
+}
+
+dependencies {
+    compile group: 'org.spigotmc', name: 'spigot-api', version: '1.12.1-R0.1-SNAPSHOT'
+    compile 'com.google.code.findbugs:jsr305:3.0.2'
+}
+
+javadoc {
+    options.stylesheetFile = new File(projectDir, "src/main/javadocs/javadoc_stylesheet.css")
+}
+
+shadowJar {
+    configurations = [project.configurations.compile]
+}
+
+build.dependsOn shadowJar
+
+task createPom() {
+    pom {
+        project {
+            groupId 'com.voxelgameslib'
+            artifactId 'chatmenuapi'
+            version version
+        }
+    }.writeTo("pom.xml")
+}

@@ -2,6 +2,10 @@
 An API for making menus inside Minecraft's chat.
 This API treats Minecraft's chat like a 2D grid, allowing you to position elements freely in chat.
 
+### Fork
+
+This is a fork for VGL to use gradle, vgls repo and protocollib.
+
 ## Preview
 ![](https://sparse.blue/files/k0ejrc.gif)
 
