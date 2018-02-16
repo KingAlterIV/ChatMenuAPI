@@ -36,7 +36,7 @@ public class PlayerChatInterceptor implements Listener {
         ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(plugin, PacketType.Play.Server.CHAT) {
 
             @Override
-            public void onPacketReceiving(PacketEvent event) {
+            public void onPacketSending(PacketEvent event) {
                 WrapperPlayServerChat chat = new WrapperPlayServerChat(event.getPacket());
                 if (chat.getChatType() != EnumWrappers.ChatType.CHAT) return;
 
