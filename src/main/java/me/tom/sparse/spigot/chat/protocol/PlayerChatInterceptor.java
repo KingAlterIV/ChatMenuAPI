@@ -43,11 +43,16 @@ public class PlayerChatInterceptor implements Listener {
                 boolean allowed = isAllowed(event.getPlayer(), chat.getMessage());
                 boolean paused = isPaused(event.getPlayer());
                 if (!paused || !allowed) {
+                    BaseComponent[] spigot = chat.getHandle().getSpecificModifier(BaseComponent[].class).read(0);
+                    if (spigot == null) return;
+                    WrappedChatComponent msg = WrappedChatComponent.fromJson(ComponentSerializer.toString(spigot));
+
                     Queue<WrappedChatComponent> queue = messageQueue.getOrDefault(event.getPlayer().getUniqueId(), new ConcurrentLinkedQueue<>());
                     while (queue.size() > 20) {
                         queue.remove();
                     }
-                    queue.add(chat.getMessage());
+
+                    queue.add(msg);
                 }
 
                 if (paused && !allowed) {
