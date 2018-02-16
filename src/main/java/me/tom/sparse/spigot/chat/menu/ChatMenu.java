@@ -38,7 +38,7 @@ public class ChatMenu implements IElementContainer {
     /**
      * Constructs a chat menu with the elements provided.
      *
-     * @param elements the elements to start the menu with.
+     * @param elements the elements to enable the menu with.
      */
     public ChatMenu(@Nonnull Element... elements) {
         this(Arrays.asList(elements));
@@ -47,7 +47,7 @@ public class ChatMenu implements IElementContainer {
     /**
      * Constructs a chat menu with the elements provided.
      *
-     * @param elements the elements to start the menu with.
+     * @param elements the elements to enable the menu with.
      */
     public ChatMenu(@Nonnull Collection<Element> elements) {
         this.elements = new ArrayList<>();
