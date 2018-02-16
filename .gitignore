@@ -1,17 +1,29 @@
-# IntelliJ project files
-.idea
+# Maven
+target/
+
+# Gradle
+.gradle/
+build/
+
+# IDEA
 *.iml
-out
-gen
+.idea/
 
-# Compiled class file
-*.class
+# Java
+*.jar
 
-# Log file
-*.log
+# JRebel <3
+rebel.xml
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# allow gradle wrapper
+!*gradle-wrapper.jar
 
-/doc/
-/test/
+# ignore ci stuff
+/deploy-stuff
+.gradletasknamecache
+
+#nobody likes you mvn ;)
+pom.xml
+
+# these are generated and are unneccesarry
+package-info.java
