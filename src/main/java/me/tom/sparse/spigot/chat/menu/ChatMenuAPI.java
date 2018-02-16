@@ -1,18 +1,18 @@
 package me.tom.sparse.spigot.chat.menu;
 
-import me.tom.sparse.spigot.chat.protocol.ChatPacketInterceptor;
-import me.tom.sparse.spigot.chat.protocol.PlayerChatIntercept;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.map.MapFont;
 import org.bukkit.map.MinecraftFont;
 import org.bukkit.plugin.Plugin;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ThreadLocalRandom;
+import me.tom.sparse.spigot.chat.protocol.PlayerChatInterceptor;
 
 public final class ChatMenuAPI
 {
@@ -20,7 +20,7 @@ public final class ChatMenuAPI
 	private static final Map<Player, ChatMenu> OPENED_MENUS = new ConcurrentHashMap<>();
 	
 	private static Plugin                plugin;
-	private static ChatPacketInterceptor interceptor;
+	private static PlayerChatInterceptor interceptor;
 	
 	private ChatMenuAPI() {}
 	
@@ -72,16 +72,13 @@ public final class ChatMenuAPI
 	}
 	
 	/**
-	 * Gets the current {@link PlayerChatIntercept} associated with the provided player.
-	 * If the player does not have one, it will be created.
+	 * Gets the current {@link PlayerChatInterceptor}
 	 *
-	 * @param player the player to get/create the {@link PlayerChatIntercept} for
-	 * @return the {@link PlayerChatIntercept} associated with the provided player
+	 * @return the {@link PlayerChatInterceptor}
 	 */
 	@Nonnull
-	public static PlayerChatIntercept getChatIntercept(@Nonnull Player player)
-	{
-		return interceptor.getChat(player);
+	public static PlayerChatInterceptor getChatIntercept() {
+		return interceptor;
 	}
 	
 	/**
@@ -184,15 +181,8 @@ public final class ChatMenuAPI
 //		Bukkit.getPluginCommand("cmapi").setExecutor(new CMCommand());
 		CMCommand.setLoggerFilter();
 		new CMListener(plugin);
-		
-		try
-		{
-			interceptor = new ChatPacketInterceptor(plugin);
-		}catch(ReflectiveOperationException e)
-		{
-			plugin.getLogger().severe("Unable to create ChatPacketInterceptor! The ChatMenuAPI will not function properly!");
-			e.printStackTrace();
-		}
+
+		interceptor = new PlayerChatInterceptor(plugin);
 	}
 	
 	/**

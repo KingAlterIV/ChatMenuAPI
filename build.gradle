@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'application'
     id 'eclipse'
     id 'com.github.johnrengelman.shadow' version '2.0.1'
     id 'com.github.ben-manes.versions' version '0.17.0'
@@ -17,11 +16,13 @@ repositories {
     mavenCentral()
     maven { url "https://hub.spigotmc.org/nexus/content/groups/public/" }
     maven { url "https://voxelgameslib.github.io/VoxelGamesLibv2/mvn-repo" }
+    maven { url "http://repo.dmulloy2.net/content/groups/public/" }
 }
 
 dependencies {
-    compile group: 'org.spigotmc', name: 'spigot-api', version: '1.12.1-R0.1-SNAPSHOT'
-    compile 'com.google.code.findbugs:jsr305:3.0.2'
+    compileOnly group: 'org.spigotmc', name: 'spigot-api', version: '1.12.1-R0.1-SNAPSHOT'
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+    compileOnly group: 'com.comphenix.protocol', name: 'ProtocolLib', version: '4.4.0-SNAPSHOT'
 }
 
 javadoc {
