@@ -21,6 +21,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 
@@ -38,16 +39,19 @@ public class PlayerChatInterceptor implements Listener {
             @Override
             public void onPacketSending(PacketEvent event) {
                 WrapperPlayServerChat chat = new WrapperPlayServerChat(event.getPacket());
-                if (chat.getChatType() != EnumWrappers.ChatType.CHAT) return;
 
-                boolean allowed = isAllowed(event.getPlayer(), chat.getMessage());
+                BaseComponent[] spigot = chat.getHandle().getSpecificModifier(BaseComponent[].class).read(0);
+                WrappedChatComponent msg;
+                if (spigot != null) {
+                    msg = WrappedChatComponent.fromJson(ComponentSerializer.toString(spigot));
+                } else {
+                    msg = chat.getMessage();
+                }
+
+                boolean allowed = isAllowed(event.getPlayer(), msg);
                 boolean paused = isPaused(event.getPlayer());
                 if (!paused || !allowed) {
-                    BaseComponent[] spigot = chat.getHandle().getSpecificModifier(BaseComponent[].class).read(0);
-                    if (spigot == null) return;
-                    WrappedChatComponent msg = WrappedChatComponent.fromJson(ComponentSerializer.toString(spigot));
-
-                    Queue<WrappedChatComponent> queue = messageQueue.getOrDefault(event.getPlayer().getUniqueId(), new ConcurrentLinkedQueue<>());
+                    Queue<WrappedChatComponent> queue = messageQueue.computeIfAbsent(event.getPlayer().getUniqueId(), (uuid) -> new ConcurrentLinkedQueue<>());
                     while (queue.size() > 20) {
                         queue.remove();
                     }
@@ -69,7 +73,7 @@ public class PlayerChatInterceptor implements Listener {
      */
     public void sendMessage(Player player, BaseComponent... message) {
         if (isPaused(player)) {
-            allowedMessages.getOrDefault(player.getUniqueId(), new ConcurrentLinkedQueue<>()).add(WrappedChatComponent.fromJson(ComponentSerializer.toString(message)));
+            allowedMessages.computeIfAbsent(player.getUniqueId(), (uuid) -> new ConcurrentLinkedQueue<>()).add(WrappedChatComponent.fromJson(ComponentSerializer.toString(message)));
         }
         player.spigot().sendMessage(message);
     }
@@ -81,41 +85,49 @@ public class PlayerChatInterceptor implements Listener {
     public void pause(Player player) {
         if (isPaused(player)) return;
         paused.put(player.getUniqueId(), true);
-        System.out.println("Pausing chat for " + player.getName());
     }
 
     public void resume(Player player) {
         if (!isPaused(player)) return;
-        paused.put(player.getUniqueId(), true);
-        System.out.println("Resuming chat for " + player.getName());
+
+        paused.put(player.getUniqueId(), false);
 
         int i = 0;
-        for (WrappedChatComponent components : messageQueue.getOrDefault(player.getUniqueId(), new ConcurrentLinkedQueue<>())) {
+        // copy so that we don't catch new messages
+        Queue<WrappedChatComponent> queuedMessages = new ConcurrentLinkedQueue<>(messageQueue.getOrDefault(player.getUniqueId(), new ConcurrentLinkedQueue<>()));
+        while (i < 20 - queuedMessages.size()) {
+            i++;
+            player.sendMessage(" ");
+        }
+
+        for (WrappedChatComponent components : queuedMessages) {
             WrapperPlayServerChat chat = new WrapperPlayServerChat();
             chat.setMessage(components);
             chat.setChatType(EnumWrappers.ChatType.CHAT);
             try {
                 ProtocolLibrary.getProtocolManager().sendServerPacket(player, chat.getHandle());
-                i++;
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
             }
         }
 
-        while (i < 20) {
-            i++;
-            player.sendMessage("");
-        }
+        allowedMessages.remove(player.getUniqueId());
+        messageQueue.remove(player.getUniqueId());
     }
 
     public boolean isAllowed(Player player, WrappedChatComponent message) {
-        return !isPaused(player) || allowedMessages.getOrDefault(player.getUniqueId(), new ConcurrentLinkedQueue<>()).remove(message);
+        return !isPaused(player) || allowedMessages.computeIfAbsent(player.getUniqueId(), (uuid) -> new ConcurrentLinkedQueue<>()).remove(message);
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e) {
         paused.remove(e.getPlayer().getUniqueId());
         messageQueue.remove(e.getPlayer().getUniqueId());
+    }
+
+    @EventHandler
+    public void onChat(AsyncPlayerChatEvent e) {
+        if (isPaused(e.getPlayer())) e.setCancelled(true);
     }
 
     public void disable() {
