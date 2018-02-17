@@ -1,10 +1,6 @@
 group 'me.minidigger'
 version '1.0-SNAPSHOT'
 
-dependencies {
-    compileOnly rootProject
-}
-
 task createPom() {
     pom {
         project {
