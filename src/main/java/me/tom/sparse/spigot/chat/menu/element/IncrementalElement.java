@@ -24,7 +24,8 @@ public class IncrementalElement extends Element {
     protected int min = Integer.MIN_VALUE, max = Integer.MAX_VALUE;
 
     /**
-     * Construct a new {@code IncrementalElement} with a minimum of {@link Integer#MIN_VALUE} and a maximum of {@link Integer#MAX_VALUE}
+     * Construct a new {@code IncrementalElement} with a minimum of {@link Integer#MIN_VALUE} and a maximum of {@link
+     * Integer#MAX_VALUE}
      *
      * @param x     the x coordinate
      * @param y     the y coordinate

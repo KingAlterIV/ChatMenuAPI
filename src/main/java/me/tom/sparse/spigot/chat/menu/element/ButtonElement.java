@@ -46,7 +46,8 @@ public class ButtonElement extends Element {
     }
 
     /**
-     * Constructs a {@code ButtonElement} with the provided callback. Will always resend the menu after the button is clicked.
+     * Constructs a {@code ButtonElement} with the provided callback. Will always resend the menu after the button is
+     * clicked.
      *
      * @param x        the x coordinate
      * @param y        the y coordinate
@@ -67,7 +68,8 @@ public class ButtonElement extends Element {
      * @param x        the x coordinate
      * @param y        the y coordinate
      * @param text     the text
-     * @param callback the callback to be called when the button is clicked. Should return {@code true} to automatically resend the menu.
+     * @param callback the callback to be called when the button is clicked. Should return {@code true} to automatically
+     *                 resend the menu.
      */
     public ButtonElement(int x, int y, @Nonnull String text, @Nullable Function<Player, Boolean> callback) {
         super(x, y);

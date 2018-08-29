@@ -41,7 +41,8 @@ public class State<V> {
     }
 
     /**
-     * Sets the current value if the provided value is not {@link Object#equals} to the old one, then calls the {@code changeCallback}.
+     * Sets the current value if the provided value is not {@link Object#equals} to the old one, then calls the {@code
+     * changeCallback}.
      *
      * @param newValue the new value
      */

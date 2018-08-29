@@ -121,7 +121,8 @@ public class NumberSliderElement extends Element {
     }
 
     /**
-     * @return the precision. Must be within (inclusive) {@link NumberSliderElement#MIN_PRECISION} and {@link NumberSliderElement#MAX_PRECISION}
+     * @return the precision. Must be within (inclusive) {@link NumberSliderElement#MIN_PRECISION} and {@link
+     * NumberSliderElement#MAX_PRECISION}
      */
     public int getPrecision() {
         return precision;
@@ -130,7 +131,8 @@ public class NumberSliderElement extends Element {
     /**
      * Sets the precision of this. Precision determines how wide the bars will be, higher precision means smaller bars.
      *
-     * @param precision the new precision. Must be within (inclusive) {@link NumberSliderElement#MIN_PRECISION} and {@link NumberSliderElement#MAX_PRECISION}
+     * @param precision the new precision. Must be within (inclusive) {@link NumberSliderElement#MIN_PRECISION} and
+     *                  {@link NumberSliderElement#MAX_PRECISION}
      */
     public void setPrecision(int precision) {
         if (precision < 0 || precision > 7)
@@ -141,7 +143,8 @@ public class NumberSliderElement extends Element {
     /**
      * Sets the precision of this. Precision determines how wide the bars will be, higher precision means smaller bars.
      *
-     * @param precision the new precision. Must be within (inclusive) {@link NumberSliderElement#MIN_PRECISION} and {@link NumberSliderElement#MAX_PRECISION}
+     * @param precision the new precision. Must be within (inclusive) {@link NumberSliderElement#MIN_PRECISION} and
+     *                  {@link NumberSliderElement#MAX_PRECISION}
      * @return this
      */
     public NumberSliderElement precision(int precision) {
@@ -197,7 +200,8 @@ public class NumberSliderElement extends Element {
     }
 
     /**
-     * Sets the length of this (based on the current precision) to attempt to make the width match as closely as possible to the target width.
+     * Sets the length of this (based on the current precision) to attempt to make the width match as closely as
+     * possible to the target width.
      *
      * @param width the width to attempt to match
      */
@@ -207,7 +211,8 @@ public class NumberSliderElement extends Element {
     }
 
     /**
-     * Sets the length of this (based on the current precision) to attempt to make the width match as closely as possible to the target width.
+     * Sets the length of this (based on the current precision) to attempt to make the width match as closely as
+     * possible to the target width.
      *
      * @param width the width to attempt to match
      * @return this

@@ -68,8 +68,8 @@ public class ChatMenu implements IElementContainer {
     /**
      * Unregister this menu.
      * <br>
-     * An unregistered menu cannot be interacted with by a player.
-     * If you attempt to build this menu with elements that don't support unregistered menus, you will get an {@link IllegalStateException}.
+     * An unregistered menu cannot be interacted with by a player. If you attempt to build this menu with elements that
+     * don't support unregistered menus, you will get an {@link IllegalStateException}.
      * <br>
      * Be sure to unregister all menus once you're done with them!
      *

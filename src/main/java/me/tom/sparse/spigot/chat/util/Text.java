@@ -28,8 +28,7 @@ public class Text {
     }
 
     /**
-     * ]
-     * Constructs a {@code Text} object with the provided text.
+     * ] Constructs a {@code Text} object with the provided text.
      *
      * @param text the starting text
      */

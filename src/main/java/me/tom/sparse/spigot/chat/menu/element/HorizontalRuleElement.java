@@ -14,7 +14,8 @@ public class HorizontalRuleElement extends Element {
     private final int width;
 
     /**
-     * Constructs a {@code HorizontalRuleElement} at the provided Y coordinate and a width of {@code 320} (default chat width).
+     * Constructs a {@code HorizontalRuleElement} at the provided Y coordinate and a width of {@code 320} (default chat
+     * width).
      *
      * @param y the y coordinate to put this element at
      */
