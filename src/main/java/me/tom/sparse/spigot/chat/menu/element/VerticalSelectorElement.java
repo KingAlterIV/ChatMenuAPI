@@ -8,8 +8,8 @@ import net.md_5.bungee.api.chat.TextComponent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import me.tom.sparse.spigot.chat.menu.ChatMenuAPI;
 import me.tom.sparse.spigot.chat.menu.IElementContainer;
@@ -22,12 +22,12 @@ import me.tom.sparse.spigot.chat.util.Text;
 public class VerticalSelectorElement extends Element {
     protected static final int SELECTED_PREFIX_WIDTH = ChatMenuAPI.getWidth("> ");
 
-    @Nonnull
+    @NotNull
     protected String[] options;
     protected int width;
 
     //	protected int selectedIndex;
-    @Nonnull
+    @NotNull
     public final State<Integer> value;
 
     @Nullable
@@ -41,7 +41,7 @@ public class VerticalSelectorElement extends Element {
      * @param defaultSelected the selected option index
      * @param options         the list of options. Options may not contain {@code \n}
      */
-    public VerticalSelectorElement(int x, int y, int defaultSelected, @Nonnull String... options) {
+    public VerticalSelectorElement(int x, int y, int defaultSelected, @NotNull String... options) {
         super(x, y);
         for (String option : options) {
             if (option.contains("\n"))
@@ -134,11 +134,11 @@ public class VerticalSelectorElement extends Element {
         return result;
     }
 
-    public void edit(@Nonnull IElementContainer container, @Nonnull String[] args) {
+    public void edit(@NotNull IElementContainer container, @NotNull String[] args) {
         value.setCurrent(Integer.parseInt(args[0]));
     }
 
-    @Nonnull
+    @NotNull
     public List<State<?>> getStates() {
         return Collections.singletonList(value);
     }

@@ -8,8 +8,8 @@ import net.md_5.bungee.api.chat.TextComponent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import me.tom.sparse.spigot.chat.menu.ChatMenuAPI;
 import me.tom.sparse.spigot.chat.menu.IElementContainer;
@@ -20,12 +20,12 @@ import me.tom.sparse.spigot.chat.util.Text;
  * A boolean element. Basically a checkbox (without the box).
  */
 public class BooleanElement extends Element {
-    @Nonnull
+    @NotNull
     public final State<Boolean> value;
 
-    @Nonnull
+    @NotNull
     protected ChatColor trueColor = ChatColor.GREEN;
-    @Nonnull
+    @NotNull
     protected ChatColor falseColor = ChatColor.RED;
 
     protected boolean showText = false;
@@ -47,7 +47,7 @@ public class BooleanElement extends Element {
      *
      * @return this
      */
-    @Nonnull
+    @NotNull
     public BooleanElement showText() {
         setShowText(true);
         return this;
@@ -65,8 +65,8 @@ public class BooleanElement extends Element {
      * @param falseColor The color the symbol should be if the value is {@code false}
      * @return this
      */
-    @Nonnull
-    public BooleanElement colors(@Nonnull ChatColor trueColor, @Nonnull ChatColor falseColor) {
+    @NotNull
+    public BooleanElement colors(@NotNull ChatColor trueColor, @NotNull ChatColor falseColor) {
         setTrueColor(trueColor);
         setFalseColor(falseColor);
         return this;
@@ -75,7 +75,7 @@ public class BooleanElement extends Element {
     /**
      * @return the color the text will be if the value is {@code false}
      */
-    @Nonnull
+    @NotNull
     public ChatColor getFalseColor() {
         return falseColor;
     }
@@ -90,7 +90,7 @@ public class BooleanElement extends Element {
     /**
      * @return the color the text will be if the value is {@code true}
      */
-    @Nonnull
+    @NotNull
     public ChatColor getTrueColor() {
         return trueColor;
     }
@@ -110,8 +110,8 @@ public class BooleanElement extends Element {
         return 1;
     }
 
-    @Nonnull
-    public List<Text> render(@Nonnull IElementContainer context) {
+    @NotNull
+    public List<Text> render(@NotNull IElementContainer context) {
         String baseCommand = context.getCommand(this);
 
         List<BaseComponent> components = new ArrayList<>();
@@ -127,7 +127,7 @@ public class BooleanElement extends Element {
         return Collections.singletonList(new Text(components));
     }
 
-    public void edit(@Nonnull IElementContainer container, @Nonnull String[] args) {
+    public void edit(@NotNull IElementContainer container, @NotNull String[] args) {
         value.setCurrent(Boolean.parseBoolean(args[0]));
     }
 
@@ -145,7 +145,7 @@ public class BooleanElement extends Element {
         this.value.setCurrent(value);
     }
 
-    @Nonnull
+    @NotNull
     public List<State<?>> getStates() {
         return Collections.singletonList(value);
     }

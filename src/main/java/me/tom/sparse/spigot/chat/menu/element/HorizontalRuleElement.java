@@ -2,7 +2,7 @@ package me.tom.sparse.spigot.chat.menu.element;
 
 import java.util.Collections;
 import java.util.List;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import me.tom.sparse.spigot.chat.menu.ChatMenuAPI;
 import me.tom.sparse.spigot.chat.menu.IElementContainer;
@@ -48,7 +48,7 @@ public class HorizontalRuleElement extends Element {
         return Collections.singletonList(new Text(text));
     }
 
-    public void edit(@Nonnull IElementContainer container, @Nonnull String[] args) {
+    public void edit(@NotNull IElementContainer container, @NotNull String[] args) {
 
     }
 }

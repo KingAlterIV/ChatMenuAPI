@@ -3,8 +3,8 @@ package me.tom.sparse.spigot.chat.menu;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -29,7 +29,7 @@ public final class ChatMenuAPI {
      * @return the menu the player currently has open, or {@code null} if no menu is open.
      */
     @Nullable
-    public static ChatMenu getCurrentMenu(@Nonnull Player player) {
+    public static ChatMenu getCurrentMenu(@NotNull Player player) {
         return OPENED_MENUS.get(player);
     }
 
@@ -37,24 +37,24 @@ public final class ChatMenuAPI {
      * @param player the player whose current menu should be returned
      * @param menu   the menu to set as current, or {@code null} if you want to close the current menu.
      */
-    public static void setCurrentMenu(@Nonnull Player player, @Nullable ChatMenu menu) {
+    public static void setCurrentMenu(@NotNull Player player, @Nullable ChatMenu menu) {
         ChatMenu old = OPENED_MENUS.remove(player);
         if (old != null && old != menu) old.onClosed(player);
         if (menu != null) OPENED_MENUS.put(player, menu);
     }
 
-    @Nonnull
+    @NotNull
     static String registerMenu(ChatMenu menu) {
         String id = generateIdentifier();
         MENUS.put(id, menu);
         return id;
     }
 
-    static void unregisterMenu(@Nonnull ChatMenu menu) {
+    static void unregisterMenu(@NotNull ChatMenu menu) {
         MENUS.values().remove(menu);
     }
 
-    @Nonnull
+    @NotNull
     private static String generateIdentifier() {
         String result = null;
         while (result == null || MENUS.containsKey(result)) {
@@ -70,7 +70,7 @@ public final class ChatMenuAPI {
      *
      * @return the {@link PlayerChatInterceptor}
      */
-    @Nonnull
+    @NotNull
     public static PlayerChatInterceptor getChatIntercept() {
         return interceptor;
     }
@@ -83,7 +83,7 @@ public final class ChatMenuAPI {
      * @param text the text to calculate the width for
      * @return the number of pixels in chat the text takes up
      */
-    public static int getWidth(@Nonnull String text) {
+    public static int getWidth(@NotNull String text) {
         if (text.contains("\n"))
             throw new IllegalArgumentException("Cannot get width of text containing newline");
 
@@ -155,7 +155,7 @@ public final class ChatMenuAPI {
      *
      * @param plugin the plugin to initialize everything with, including listeners and scheduled tasks
      */
-    public static void init(@Nonnull Plugin plugin) {
+    public static void init(@NotNull Plugin plugin) {
         if (ChatMenuAPI.plugin != null)
             return;
 

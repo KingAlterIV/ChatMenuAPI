@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import me.tom.sparse.spigot.chat.menu.IElementContainer;
 import me.tom.sparse.spigot.chat.util.Text;
@@ -83,7 +83,7 @@ public class ImageElement extends Element {
         return result;
     }
 
-    public void edit(@Nonnull IElementContainer container, @Nonnull String[] args) {
+    public void edit(@NotNull IElementContainer container, @NotNull String[] args) {
         int index = Integer.parseInt(args[0]);
         colors[index] = onPixelClick(index / 20, index % 20, colors[index]);
     }

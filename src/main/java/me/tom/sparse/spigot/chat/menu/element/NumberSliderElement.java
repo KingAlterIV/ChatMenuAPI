@@ -8,8 +8,8 @@ import net.md_5.bungee.api.chat.TextComponent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import org.bukkit.entity.Player;
 
@@ -23,16 +23,16 @@ public class NumberSliderElement extends Element {
     public static final int MIN_PRECISION = 0;
     public static final int MAX_PRECISION = 7;
 
-    @Nonnull
+    @NotNull
     public final State<Integer> value;
     protected int length;
 
-    @Nonnull
+    @NotNull
     protected ChatColor fullColor = ChatColor.GREEN;
-    @Nonnull
+    @NotNull
     protected ChatColor emptyColor = ChatColor.RED;
 
-    @Nonnull
+    @NotNull
     protected NumberFormat numberFormat = NumberFormat.PERCENTAGE;
 
     protected int precision = 6;
@@ -78,8 +78,8 @@ public class NumberSliderElement extends Element {
      * @param emptyColor the color for all of the empty bars
      * @return this
      */
-    @Nonnull
-    public NumberSliderElement colors(@Nonnull ChatColor fullColor, @Nonnull ChatColor emptyColor) {
+    @NotNull
+    public NumberSliderElement colors(@NotNull ChatColor fullColor, @NotNull ChatColor emptyColor) {
         setFullColor(fullColor);
         setEmptyColor(emptyColor);
         return this;
@@ -108,7 +108,7 @@ public class NumberSliderElement extends Element {
     /**
      * @return the current number format
      */
-    @Nonnull
+    @NotNull
     public NumberFormat getNumberFormat() {
         return numberFormat;
     }
@@ -158,7 +158,7 @@ public class NumberSliderElement extends Element {
     /**
      * @return the color for all of the empty bars
      */
-    @Nonnull
+    @NotNull
     public ChatColor getEmptyColor() {
         return emptyColor;
     }
@@ -173,7 +173,7 @@ public class NumberSliderElement extends Element {
     /**
      * @return the color for all of the full bars
      */
-    @Nonnull
+    @NotNull
     public ChatColor getFullColor() {
         return fullColor;
     }
@@ -217,7 +217,7 @@ public class NumberSliderElement extends Element {
      * @param width the width to attempt to match
      * @return this
      */
-    @Nonnull
+    @NotNull
     public NumberSliderElement width(int width) {
         setWidth(width);
         return this;
@@ -281,17 +281,17 @@ public class NumberSliderElement extends Element {
         return true;
     }
 
-    public boolean onClick(@Nonnull IElementContainer container, @Nonnull Player player) {
+    public boolean onClick(@NotNull IElementContainer container, @NotNull Player player) {
         return isEnabled() && super.onClick(container, player);
     }
 
-    public void edit(@Nonnull IElementContainer container, @Nonnull String[] args) {
+    public void edit(@NotNull IElementContainer container, @NotNull String[] args) {
         if (!isEnabled())
             return;
         value.setCurrent(Integer.parseInt(args[0]));
     }
 
-    @Nonnull
+    @NotNull
     public List<State<?>> getStates() {
         return Collections.singletonList(value);
     }
