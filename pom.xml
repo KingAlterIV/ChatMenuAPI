@@ -27,17 +27,6 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>paper</id>
-            <url>https://destroystokyo.com/repo/repository/maven-public/</url>
-        </repository>
-        <repository>
-            <id>dmulloy2</id>
-            <url>http://repo.dmulloy2.net/content/groups/public/</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <!-- provided -->
         <dependency>

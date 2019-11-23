@@ -108,7 +108,7 @@ public class ChatMenu implements IElementContainer {
      * @return the element added
      */
     public <T extends Element> T add(@NotNull T t) {
-        Objects.requireNotNull(t);
+        Objects.requireNonNull(t);
         elements.add(t);
         elements.sort(Comparator.comparingInt(Element::getX));
         return t;

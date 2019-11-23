@@ -37,7 +37,7 @@ public class GroupElement extends Element implements IElementContainer {
      * @return the element that was added
      */
     public <T extends Element> T add(@NotNull T element) {
-        Objects.requireNotNull(element);
+        Objects.requireNonNull(element);
         elements.add(element);
         elements.sort(Comparator.comparingInt(Element::getX));
         return element;
