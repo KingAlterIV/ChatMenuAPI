@@ -66,8 +66,7 @@ public class WrapperPlayServerChat extends AbstractPacket {
     /**
      * Retrieve Position.
      * <p>
-     * Notes: 0 - Chat (chat box) ,1 - System Message (chat box), 2 - Above
-     * action bar
+     * Notes: 0 - Chat (chat box) ,1 - System Message (chat box), 2 - Above action bar
      *
      * @return The current Position
      * @deprecated Magic values replaced by enum

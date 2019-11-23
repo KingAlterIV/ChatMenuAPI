@@ -1,11 +1,12 @@
 package me.tom.sparse.spigot.chat.menu.element;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import org.jetbrains.annotations.NotNull;
 
 import org.bukkit.entity.Player;
 

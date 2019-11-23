@@ -1,10 +1,11 @@
 package me.tom.sparse.spigot.chat.menu.element;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
