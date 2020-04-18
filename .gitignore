@@ -13,3 +13,9 @@ target/
 
 # these are generated and are unneccesarry
 package-info.java
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
