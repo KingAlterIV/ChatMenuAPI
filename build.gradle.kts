@@ -1,10 +1,11 @@
 plugins {
     java
+    `maven-publish`
     id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
-group = "me.nahu"
-version = "1.0.9"
+group = "me.tom.sparse"
+version = "1.1.1"
 
 repositories {
     mavenCentral()
@@ -48,4 +49,23 @@ configure<JavaPluginConvention> {
 
 tasks.withType<JavaCompile> {
     options.compilerArgs.add("-parameters")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("default") {
+            from(components["java"])
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Minevictus/ChatMenuAPI/")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR") // provided by actions
+                password = System.getenv("GITHUB_TOKEN") // provided by actions
+            }
+        }
+    }
 }

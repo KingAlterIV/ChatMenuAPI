@@ -4,9 +4,6 @@ target/
 *.iml
 .idea/
 
-# Java
-*.jar
-
 # ignore ci stuff
 /deploy-stuff
 .gradletasknamecache

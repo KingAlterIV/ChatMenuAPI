@@ -32,12 +32,16 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: ./gradlew generateBukkitPluginDescription shadowJar --no-daemon
+        run: ./gradlew build --no-daemon
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: ./build/libs/*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish artifact
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./gradlew publish
       - name: Remove jars before caching
         run: rm ./build/libs/*.jar
