@@ -6,7 +6,7 @@ This API treats Minecraft's chat like a 2D grid, allowing you to position elemen
 
 ### Fork
 
-This is a fork for VGL to use gradle, vgls repo and protocollib.
+This is a fork of VGL for Minevictus where we updated the API to use Gradle, with the latest version of PaperMC. As well as setting up releases and publishing it to maven repositories for ease of access.
 
 ## Preview
 ![](https://sparse.blue/files/k0ejrc.gif)
