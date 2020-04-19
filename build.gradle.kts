@@ -64,7 +64,7 @@ bintray {
     setPublications("mavenJava")
 
     with(pkg) {
-        repo = "projects"
+        repo = "minevictus"
         userOrg = user
         name = "ChatMenuAPI"
         setLicenses("GPL-3.0")
