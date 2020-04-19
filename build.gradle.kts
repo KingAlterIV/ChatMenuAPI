@@ -54,6 +54,10 @@ tasks.withType<JavaCompile> {
     options.compilerArgs.add("-parameters")
 }
 
+publishing.publications.create<MavenPublication> ("mavenJava") {
+    from(components["java"])
+}
+
 bintray {
     user = System.getenv("BINTRAY_USER")
     key = System.getenv("BINTRAY_API_KEY")
