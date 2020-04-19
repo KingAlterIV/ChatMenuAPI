@@ -1,7 +1,10 @@
+import java.util.*
+
 plugins {
     java
     `maven-publish`
     id("com.github.johnrengelman.shadow") version "5.2.0"
+    id("com.jfrog.bintray") version "1.8.5"
 }
 
 group = "me.tom.sparse"
@@ -51,23 +54,27 @@ tasks.withType<JavaCompile> {
     options.compilerArgs.add("-parameters")
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("default") {
-            from(components["java"])
+bintray {
+    user = System.getenv("BINTRAY_USER")
+    key = System.getenv("BINTRAY_API_KEY")
+    setPublications("mavenJava")
+
+    with(pkg) {
+        repo = "projects"
+        userOrg = user
+        name = "ChatMenuAPI"
+        setLicenses("GPL-3.0")
+        vcsUrl = "https://github.com/Minevictus/ChatMenuAPI.git"
+
+        with(version) {
+            name = project.version.toString()
+            desc = "An API for making menus inside Minecraft's chat. $name"
+            released = Date().toString()
         }
     }
 
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/Minevictus/ChatMenuAPI/")
-            credentials {
-                username = System.getenv("GITHUB_ACTOR") // provided by actions
-                password = System.getenv("GITHUB_TOKEN") // provided by actions
-            }
-        }
-    }
+    override = true // just in case
+    publish = true
 }
 
 // Foot fungus // TODO (RMS): Eat this.
