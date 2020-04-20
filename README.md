@@ -1,10 +1,12 @@
+[![Download](https://api.bintray.com/packages/nahuld/minevictus/ChatMenuAPI/images/download.svg)](https://bintray.com/nahuld/minevictus/ChatMenuAPI/_latestVersion)
+
 # ChatMenuAPI
 An API for making menus inside Minecraft's chat.
 This API treats Minecraft's chat like a 2D grid, allowing you to position elements freely in chat.
 
 ### Fork
 
-This is a fork for VGL to use gradle, vgls repo and protocollib.
+This is a fork of VGL for Minevictus where we updated the API to use Gradle, with the latest version of PaperMC. As well as setting up releases and publishing it to maven repositories for ease of access.
 
 ## Preview
 ![](https://sparse.blue/files/k0ejrc.gif)
@@ -28,10 +30,74 @@ This is a fork for VGL to use gradle, vgls repo and protocollib.
 ## Usage
 
 ### Setup
-Add `ChatMenuAPI.jar` to your build path, then add it as a dependency in your `plugin.yml`:
-```YAML
-depend: [ChatMenuAPI]
+
+#### Requirements
+- JDK 8 or above.
+
+#### Download:
+Download `ChatMenuAPI.jar` from the releases page, then add it as a dependency in your local workspace.
+
+#### Gradle or Maven
+> Replace `VERSION` with a specific version. The latest version which can be found at
+> the "Download" button or the Bintray page.
+
+###### Maven
+```xml
+<repositories>
+  <repository>
+    <snapshots>
+      <enabled>false</enabled>
+    </snapshots>
+    <name>bintray</name>
+    <url>https://dl.bintray.com/nahuld/minevictus/</url>
+  </repository>
+</repositories>
+
+<dependencies>
+  <dependency>
+    <groupId>me.tom.sparse</groupId>
+    <artifactId>ChatMenuAPI</artifactId>
+    <version>VERSION</version>
+  </dependency>
+</dependencies>
 ```
+###### Gradle
+```groovy
+repositories {
+    maven {
+        url  'https://dl.bintray.com/nahuld/minevictus' 
+    }
+}
+
+dependencies {
+     implementation 'me.tom.sparse:ChatMenuAPI:VERSION'
+}
+```
+###### Gradle KTS
+```kotlin
+repositories {
+    maven {
+        url = uri("https://dl.bintray.com/nahuld/minevictus") 
+    }
+}
+
+dependencies {
+     implementation("me.tom.sparse:ChatMenuAPI:VERSION")
+}
+```
+**IMPORTANT!** If you are using this plugin bundled within others, you will need to initialize and disable the API manually, which you can do by adding the following methods to your JavaPlugin class.
+```java
+@Override
+public void onEnable() {
+    ChatMenuAPI.init(this);
+}    
+
+@Override
+public void onDisable() {
+    ChatMenuAPI.disable();
+}
+```
+
 ### ChatMenu
 To create a menu, just create a new instance of `ChatMenu`:
 ```Java
