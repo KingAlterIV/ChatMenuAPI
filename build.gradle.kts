@@ -43,6 +43,8 @@ dependencies {
     compileOnly("com.destroystokyo.paper:paper-api:1.15-R0.1-SNAPSHOT")
     compileOnly("com.comphenix.protocol:ProtocolLib:4.5.0")
     compileOnly("org.jetbrains:annotations:19.0.0")
+    compileOnly("org.apache.logging.log4j:log4j-api:2.13.2")
+    compileOnly("org.apache.logging.log4j:log4j-core:2.13.2")
 }
 
 configure<JavaPluginConvention> {

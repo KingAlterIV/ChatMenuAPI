@@ -1,5 +1,6 @@
 package me.tom.sparse.spigot.chat.menu;
 
+import me.tom.sparse.spigot.chat.util.LogFilter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -162,8 +163,8 @@ public final class ChatMenuAPI {
 
         ChatMenuAPI.plugin = plugin;
 //		Bukkit.getPluginCommand("cmapi").setExecutor(new CMCommand());
-        CMCommand.setLoggerFilter();
         new CMListener(plugin);
+        new LogFilter();
 
         interceptor = new PlayerChatInterceptor(plugin);
     }
@@ -177,7 +178,6 @@ public final class ChatMenuAPI {
         if (plugin == null)
             return;
 
-        CMCommand.restoreLoggerFilter();
         plugin = null;
         interceptor.disable();
     }
